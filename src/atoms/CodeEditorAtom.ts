@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
- export const FONT_OPTIONS = [12, 14, 16, 20, 22, 24];
+export const FONT_OPTIONS = [12, 14, 16, 20, 22, 24];
 
 type CodeLanguageType = 'javascript'
 export type CodeEditorType = {

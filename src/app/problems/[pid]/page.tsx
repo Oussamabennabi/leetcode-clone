@@ -5,35 +5,21 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 import Navbar from '@/components/Navbar';
 import ProblemDescription from '@/components/ProblemDescription';
 import { auth, firestore } from '@/firebase'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { fn, problems } from '@/utils/problems';
-import { Problem } from '@/utils/types/problem';
+import {  problems } from '@/utils/problems';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { useParams } from 'next/navigation'
 import React,{useEffect,useState} from 'react';
-import Confetti from 'react-confetti/dist/types/Confetti'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Split from 'react-split';
 import { toast } from 'react-toastify'
 import ReactConfetti from 'react-confetti'
 
-type PageProps = {
-	problem: Problem;
-};
+
 
 const Page = (p:any) => {
-	console.log(p);
 	const problem = problems[p.params.pid]
 let [userCode, setUserCode] = useState<string>(problem.starterCode);
 
-const [fontSize, setFontSize] = useLocalStorage('lcc-fontSize', '16px');
-
-// const [settings, setSettings] = useState<ISettings>({
-// 	fontSize: fontSize,
-// 	settingsModalIsOpen: false,
-// 	dropdownIsOpen: false,
-// });
 const { width, height } = useWindowSize();
 const [success, setSuccess] = useState(false);
 const [solved, setSolved] = useState(false);
@@ -119,6 +105,7 @@ const onChange = (value: string) => {
 			>
 				<ProblemDescription _solved={solved} problem={problem} />
 
+
 				<Split  sizes={[50, 50]} direction="vertical">
 					<CodeEditor
 						problem={problem}
@@ -126,6 +113,7 @@ const onChange = (value: string) => {
 						userCode={userCode}
 					/>
 					<Console problem={problem} handleSubmit={handleSubmit} />
+
 				</Split>
 			</Split>
 			{success && (
@@ -139,27 +127,6 @@ const onChange = (value: string) => {
 		</main>
 	);
 };
-export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = Object.keys(problems).map((key) => ({
-		params: { pid: key },
-	}));
-	return {
-		paths,
-		fallback: false,
-	};
-};
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { pid }: any = params;
-	const problem = fn(pid);
-	if (!problem) {
-		return {
-			notFound: true,
-		};
-	}
-	problem.handlerFunction = problem.handlerFunction.toString();
-	return {
-		props: { problemss: { hi: 'hi', hello: 'hello' } },
-	};
-};
+
 
 export default Page;

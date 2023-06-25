@@ -15,6 +15,7 @@ type CodeEditorProps = {
 };
 
 const CodeEditor: React.FC<CodeEditorProps> = ({problem,userCode,onChange}) => {
+
 	const editorSettings = useRecoilValue(codeEditorState)
 	console.log(editorSettings.fontSize);
 	return (
@@ -25,7 +26,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({problem,userCode,onChange}) => {
 			>
 				<CodeMirror
 					value={userCode}
-					// height="200px"
 					className={`h-[calc(100%)] overflow-scroll w-full  `}
 					theme={vscodeDark}
 					extensions={[javascript({ jsx: true })]}
