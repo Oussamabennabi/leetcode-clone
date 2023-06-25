@@ -5,21 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Inter } from 'next/font/google';
 
-import { Metadata } from 'next';
-
 import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-	title: 'LeetCode',
 
-	icons: {
-		icon: [{ url: './favicon.png' }],
-	},
-	description: 'Web application that contains leetcode problems and vedios',
-};
 
 export default function RootLayout({
 	children,
