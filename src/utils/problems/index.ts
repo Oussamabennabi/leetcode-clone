@@ -16,7 +16,3 @@ export const problems: ProblemMap = {
 	"search-a-2d-matrix": search2DMatrix,
 	"valid-parentheses": validParentheses,
 };
-export function fn(p) {
-	console.log('from FNFNFNFN', p);
-	return problems[p];
-}
