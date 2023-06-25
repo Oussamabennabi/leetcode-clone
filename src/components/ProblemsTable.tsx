@@ -1,5 +1,6 @@
 'use client';
 import { useGetProblems } from '@/hooks/useGetProblems'
+import { useGetSolvedProblems } from '@/hooks/useGetSolvedProblems'
 
 import Link from 'next/link';
 import React from 'react';
@@ -10,7 +11,7 @@ type ProblemsTableProps = {};
 
 const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 	const { problems, loading } = useGetProblems();
-
+const solvedProblems = useGetSolvedProblems();
 	return (
 		<table className="w-[80%] rounded-lg overflow-hidden  mx-auto border-collapse border border-slate-500 table table-auto text-white bg-zinc-800">
 			<thead>
@@ -60,9 +61,12 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 								} `}
 							>
 								<td className="p-4">
-									<div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-500 cursor-pointer  hover:text-green-600">
-										<BsCheck2Circle />
-									</div>
+									{/* solved */}
+									{solvedProblems.includes(p.id) && (
+										<div className="rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-500 cursor-pointer  hover:text-green-600">
+											<BsCheck2Circle />
+										</div>
+									)}
 								</td>
 								<td className="p-4">
 									<Link href={`/problems/${p.id}`} className="hover:underline">
